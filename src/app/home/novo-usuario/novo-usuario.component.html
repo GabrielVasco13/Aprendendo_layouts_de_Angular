@@ -3,6 +3,20 @@
 <form class="form mt-4" [formGroup]="NovoUsuarioForm" (submit)="cadastrar()">
   <div class="form-group">
     <input placeholder="e-mail" class="form-control" formControlName="email" />
+    <app-mensagem
+      *ngIf="
+        NovoUsuarioForm.get('email')?.errors?.['required'] &&
+        NovoUsuarioForm.get('email')?.touched
+      "
+      mensagem="Email obrigatorio"
+    >
+    </app-mensagem>
+    <app-mensagem
+    *ngIf="NovoUsuarioForm.get('email')?.errors?.['email'] &&
+    NovoUsuarioForm.get('email')?.touched"
+    mensagem="E-mail no formato incorreto"
+    >
+    </app-mensagem>
   </div>
   <div class="form-group">
     <input
@@ -10,6 +24,11 @@
       class="form-control"
       formControlName="fullName"
     />
+    <app-mensagem
+    *ngIf="NovoUsuarioForm.get('fullName')?.errors &&
+    NovoUsuarioForm.get('fullName')?.touched"
+    mensagem="Nome incorreto">
+    </app-mensagem>
   </div>
   <div class="form-group">
     <input
